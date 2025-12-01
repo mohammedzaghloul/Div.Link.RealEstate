@@ -1,0 +1,6 @@
+@Div.Link.RealEstate.API_HostAddress = http://localhost:5168
+
+GET {{Div.Link.RealEstate.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
