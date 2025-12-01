@@ -1,5 +1,9 @@
+﻿using CloudinaryDotNet;
+using Div.Link.RealEstate.BLL.Manager.CloudinaryService;
 using Div.Link.RealEstate.DAL.Data;
+using Div.Link.RealEstate.DAL.Model;
 using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUser.Div.Link.RealEstate.DAL.Model.ApplicationUser;
 using Div.Link.RealEstate.DAL.Repository.BaseRepo;
 using Div.Link.RealEstate.DAL.Repository.UserRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,17 +28,30 @@ namespace Div.Link.RealEstate.API
             // ============ Database Connection ============
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-                //.UseLazyLoadingProxies();
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .UseLazyLoadingProxies();
             });
-
-
-            // ============ Identity ============
-            builder.Services.AddIdentity<User, IdentityRole>()
-                //.AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            #region AddServices
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #endregion
+
+            #region Identity
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
+            })
+          .AddEntityFrameworkStores<ApplicationDbContext>()
+          .AddDefaultTokenProviders();
+            #endregion
+
             #region Policy
             // ============ CORS Policy ============
             builder.Services.AddCors(options =>
@@ -45,9 +62,20 @@ namespace Div.Link.RealEstate.API
                           .AllowAnyMethod()
                           .AllowAnyHeader();
                 });
-            }); 
+            });
             #endregion
 
+            #region cloudinaryAccount
+            var cloudinaryAccount = new Account(
+                 builder.Configuration["Cloudinary:CloudName"],
+                 builder.Configuration["Cloudinary:ApiKey"],
+                 builder.Configuration["Cloudinary:ApiSecret"]
+             );
+            builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("Cloudinary"));
+
+            builder.Services.AddScoped<CloudinaryService>();
+            #endregion
 
             #region Authentication
 
