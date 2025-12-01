@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.DAL.Model
 {
-    internal class BaseEntity
+    public class BaseEntity
     {
+        public int Id { get; set; }
     }
 }

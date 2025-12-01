@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.DAL.Repository.UserRepo
 {
-    internal interface IUserRepository
+    public interface IUnitOfWork
     {
+        
     }
 }

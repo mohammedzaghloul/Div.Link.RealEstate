@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.DAL.Model.ApplicationUser
 {
-    internal class User
+    public class User
     {
     }
 }

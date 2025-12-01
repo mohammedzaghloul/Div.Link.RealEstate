@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.DAL.Repository.BaseRepo
 {
-    internal interface IBaseRepository
+    public interface IBaseRepository<T>
     {
+        public IEnumerable<T> Getall();
+        public T GetById(int Id);
+        public void Delete(int Id);
+        public void Update(T entity);
+        public void Add(T entity);
     }
 }

@@ -1,3 +1,14 @@
+using Div.Link.RealEstate.DAL.Data;
+using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Repository.BaseRepo;
+using Div.Link.RealEstate.DAL.Repository.UserRepo;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace Div.Link.RealEstate.API
 {
@@ -7,26 +18,128 @@ namespace Div.Link.RealEstate.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddControllers()
+                .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // ============ Database Connection ============
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                //.UseLazyLoadingProxies();
+            });
+
+
+            // ============ Identity ============
+            builder.Services.AddIdentity<User, IdentityRole>()
+                //.AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #region Policy
+            // ============ CORS Policy ============
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            }); 
+            #endregion
+
+
+            #region Authentication
+
+            // ============ JWT Authentication ============
+            var secretKey = builder.Configuration["JWT:SecritKey"];
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true
+                };
+            }); 
+            #endregion
+
+            #region Swagger Configuration 
+
+            // ============ Swagger Configuration ============
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "ASP.NET 8 Web API",
+                    Description = "ITI Project",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Mohammed Zaghloul",
+                        Email = "mohammedzaghloul0123@gmail.com"
+                    }
+                });
 
+                // ?? JWT Support in Swagger
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' followed by your token.\nExample: 'Bearer 12345abcdef'"
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+
+                //options.EnableAnnotations();
+            });
+
+            #endregion
+
+ 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // ============ Middleware ============
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            //app.UseStaticFiles();
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors("AllowAll");
 
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
