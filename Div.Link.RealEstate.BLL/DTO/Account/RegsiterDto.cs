@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.BLL.DTO.User
 {
-    internal class UserAddDto
+    public class RegsiterDto
     {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
     }
 }
