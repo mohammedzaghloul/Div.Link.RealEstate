@@ -19,11 +19,11 @@ namespace Div.Link.RealEstate.DAL.Repository.UserRepo
         {
             this.dbContext = dbContext;
         }
-        private IFavoriteRepository _favoriteRepository;
-        private IPaymentRepository _paymentRepository;
-        private IPropertyRepository _propertyRepository;
-        private IAppointmentRepository _appointmentRepository;
-        private IPropertyImageRepository _propertyImageRepository;
+        private IFavoriteRepository? _favoriteRepository;
+        private IPaymentRepository? _paymentRepository;
+        private IPropertyRepository? _propertyRepository;
+        private IAppointmentRepository? _appointmentRepository;
+        private IPropertyImageRepository? _propertyImageRepository;
         private readonly ApplicationDbContext dbContext;
 
         public IFavoriteRepository FavoriteRepository => _favoriteRepository  ??= new FavoriteRepository(dbContext);
