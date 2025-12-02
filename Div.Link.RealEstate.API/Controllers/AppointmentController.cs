@@ -1,17 +1,18 @@
-﻿using Div.Link.RealEstate.BLL.DTO.PropertyDto;
-using Div.Link.RealEstate.BLL.Manager.PropertyManagers;
+﻿using Div.Link.RealEstate.BLL.DTO.AppointmentDto;
+using Div.Link.RealEstate.BLL.Manager.AppointmentManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Div.Link.RealEstate.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class PropertyController : ControllerBase
+    public class AppointmentController : ControllerBase
     {
-        private readonly IPropertyManager _manager;
+        private readonly IAppointmentManager _manager;
 
-        public PropertyController(IPropertyManager manager)
+        public AppointmentController(IAppointmentManager manager)
         {
             _manager = manager;
         }
@@ -31,17 +32,17 @@ namespace Div.Link.RealEstate.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(PropertyCreateDto dto)
+        public IActionResult Create(AppointmentCreateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             _manager.Add(dto);
-            return Ok(new { message = "Property created successfully." });
+            return Ok(new { message = "Appointment created successfully." });
         }
 
         [HttpPut]
-        public IActionResult Update(PropertyUpdateDto dto)
+        public IActionResult Update(AppointmentUpdateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -49,7 +50,7 @@ namespace Div.Link.RealEstate.API.Controllers
             try
             {
                 _manager.Update(dto);
-                return Ok(new { message = "Property updated successfully." });
+                return Ok(new { message = "Appointment updated successfully." });
             }
             catch (KeyNotFoundException ex)
             {
@@ -63,7 +64,7 @@ namespace Div.Link.RealEstate.API.Controllers
             try
             {
                 _manager.Delete(id);
-                return Ok(new { message = "Property deleted successfully." });
+                return Ok(new { message = "Appointment deleted successfully." });
             }
             catch (KeyNotFoundException ex)
             {

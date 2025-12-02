@@ -1,5 +1,5 @@
 ﻿using Div.Link.RealEstate.BLL.DTO.Account;
-using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -13,11 +13,11 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager,
+        public AccountController(UserManager<ApplicationUser> userManager,
                                 RoleManager<IdentityRole> roleManager,
                                 IConfiguration configuration)
         {
@@ -49,7 +49,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             }
 
             // إنشاء المستخدم الجديد
-            var user = new User
+            var user = new ApplicationUser
             {
                 UserName = model.UserName,
                 Email = model.Email,
@@ -136,7 +136,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
       
 
        // Create Token
-        private async Task<string> GenerateJwtToken(User user)
+        private async Task<string> GenerateJwtToken(ApplicationUser user)
         {
             var claims = new List<Claim>
             {
