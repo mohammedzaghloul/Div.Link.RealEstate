@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Div.Link.RealEstate.DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace Div.Link.RealEstate.BLL.Manager.FavoriteManager
 {
     public interface IFavoriteManager
     {
-
-
+  
     }
 }

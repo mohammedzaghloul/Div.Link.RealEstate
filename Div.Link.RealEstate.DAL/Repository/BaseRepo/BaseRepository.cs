@@ -28,9 +28,9 @@ namespace Div.Link.RealEstate.DAL.Repository.BaseRepo
 
         public void Delete(int Id)
         {
-            var studentFromDb = dbContext.Set<T>().FirstOrDefault(s => s.Id == Id);
-            if (studentFromDb != null)
-                DbSetT.Remove(studentFromDb);
+            var  FromDb = dbContext.Set<T>().FirstOrDefault(s => s.Id == Id);
+            if ( FromDb != null)
+                DbSetT.Remove( FromDb);
 
         }
 
@@ -41,9 +41,9 @@ namespace Div.Link.RealEstate.DAL.Repository.BaseRepo
 
         public T GetById(int Id)
         {
-            var studentFromDb = DbSetT.FirstOrDefault(s => s.Id == Id);
+            var  FromDb = DbSetT.FirstOrDefault(s => s.Id == Id);
 
-            return studentFromDb;
+            return  FromDb;
         }
 
         public void Update(T entity)

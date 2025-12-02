@@ -4,6 +4,7 @@ using Div.Link.RealEstate.DAL.Repository.FavoriteRepo;
 using Div.Link.RealEstate.DAL.Repository.PaymentRepo;
 using Div.Link.RealEstate.DAL.Repository.PropertyImageRepo;
 using Div.Link.RealEstate.DAL.Repository.PropertyRepo;
+using Div.Link.RealEstate.DAL.Repository.UserRepo;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Div.Link.RealEstate.DAL.Repository.UserRepo
+namespace Div.Link.RealEstate.DAL.Repository.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
+  
+
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+            
         }
         private IFavoriteRepository? _favoriteRepository;
         private IPaymentRepository? _paymentRepository;

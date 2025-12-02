@@ -4,6 +4,7 @@ using Div.Link.RealEstate.DAL.Data;
 using Div.Link.RealEstate.DAL.Model;
 using Div.Link.RealEstate.DAL.Model.ApplicationUser;
 using Div.Link.RealEstate.DAL.Repository.BaseRepo;
+using Div.Link.RealEstate.DAL.Repository.UnitOfWork;
 using Div.Link.RealEstate.DAL.Repository.UserRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;

@@ -14,5 +14,7 @@ namespace Div.Link.RealEstate.DAL.Repository.UserRepo
 
         public IAppointmentRepository AppointmentRepository { get; }
         public IPropertyImageRepository PropertyImageRepository { get; }
+    
+
     }
 }
