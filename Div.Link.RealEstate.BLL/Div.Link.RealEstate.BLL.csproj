@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Div.Link.RealEstate.DAL\Div.Link.RealEstate.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\NewFolder\" />
-  </ItemGroup>
-
 </Project>

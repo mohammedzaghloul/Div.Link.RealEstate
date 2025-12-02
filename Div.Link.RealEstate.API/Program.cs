@@ -1,8 +1,9 @@
 ﻿using CloudinaryDotNet;
+using Div.Link.RealEstate.BLL.AutoMapper;
 using Div.Link.RealEstate.BLL.Manager.CloudinaryService;
 using Div.Link.RealEstate.DAL.Data;
 using Div.Link.RealEstate.DAL.Model;
-using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
 using Div.Link.RealEstate.DAL.Repository.BaseRepo;
 using Div.Link.RealEstate.DAL.Repository.UnitOfWork;
 using Div.Link.RealEstate.DAL.Repository.UserRepo;
@@ -34,10 +35,12 @@ namespace Div.Link.RealEstate.API
             #region AddServices
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             #endregion
 
             #region Identity
-            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;
@@ -72,7 +75,7 @@ namespace Div.Link.RealEstate.API
                  builder.Configuration["Cloudinary:ApiSecret"]
              );
             builder.Services.Configure<CloudinarySettings>(
-    builder.Configuration.GetSection("Cloudinary"));
+            builder.Configuration.GetSection("Cloudinary"));
 
             builder.Services.AddScoped<CloudinaryService>();
             #endregion

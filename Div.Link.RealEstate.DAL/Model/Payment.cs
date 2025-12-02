@@ -1,5 +1,5 @@
 ﻿
-using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
  using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,9 +9,6 @@ namespace Div.Link.RealEstate.DAL.Model
     public class Payment:BaseEntity
     {
 
-        public int PaymentID { get; set; }
-
-      
         public decimal Amount { get; set; }
 
        
@@ -31,7 +28,7 @@ namespace Div.Link.RealEstate.DAL.Model
         public int PropertyID { get; set; }
 
         [ForeignKey("UserID")]
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("PropertyID")]
         public virtual Property Property { get; set; }

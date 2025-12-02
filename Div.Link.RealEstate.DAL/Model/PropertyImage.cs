@@ -6,9 +6,6 @@ namespace Div.Link.RealEstate.DAL.Model
 {
     public class PropertyImage:BaseEntity
     {
-
-        public int ImageID { get; set; }
-
         public string ImageUrl { get; set; }
 
         public string PublicId { get; set; } 

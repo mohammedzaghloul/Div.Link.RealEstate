@@ -36,7 +36,7 @@ namespace Div.Link.RealEstate.DAL.Repository.BaseRepo
 
         public IEnumerable<T> Getall()
         {
-            return DbSetT.ToList();
+            return DbSetT.AsNoTracking().ToList();
         }
 
         public T GetById(int Id)

@@ -1,4 +1,4 @@
-﻿using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+﻿using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,8 +12,6 @@ using System.Threading.Tasks;
     {
         public class Property  : BaseEntity 
         {
-  
-            public int PropertyID { get; set; }
             public string Title { get; set; }
 
    
@@ -37,7 +35,7 @@ using System.Threading.Tasks;
             public string Status { get; set; } 
             public string SellerID { get; set; }
             [ForeignKey("SellerID")]
-            public virtual User Seller { get; set; }
+            public virtual ApplicationUser Seller { get; set; }
 
             public virtual ICollection<PropertyImage> Images { get; set; }
             public virtual ICollection<Favorite> Favorites { get; set; }

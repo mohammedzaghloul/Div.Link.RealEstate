@@ -38,5 +38,14 @@ namespace Div.Link.RealEstate.DAL.Repository.UnitOfWork
         public IAppointmentRepository AppointmentRepository => _appointmentRepository ??= new AppointmentRepository(dbContext);
 
         public IPropertyImageRepository PropertyImageRepository => _propertyImageRepository??= new PropertyImageRepository(dbContext);
+
+        public int Complete()
+        {
+         return   dbContext.SaveChanges();
+        }
+        public void Dispose()
+        {
+            dbContext.Dispose();
+        }
     }
 }

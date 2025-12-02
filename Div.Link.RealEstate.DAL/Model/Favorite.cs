@@ -1,5 +1,6 @@
 ﻿
-using Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
+using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +9,6 @@ namespace Div.Link.RealEstate.DAL.Model
 {
     public class Favorite :BaseEntity
     {
-
-        public int FavoriteID { get; set; }
 
 
         public string UserID { get; set; }
@@ -21,7 +20,7 @@ namespace Div.Link.RealEstate.DAL.Model
 
         
         [ForeignKey("UserID")]
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("PropertyID")]
         public virtual Property Property { get; set; }
