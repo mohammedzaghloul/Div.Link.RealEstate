@@ -1,6 +1,6 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using Div.Link.RealEstate.BLL.DTO;
+using Div.Link.RealEstate.BLL.DTO.Account;
 using Div.Link.RealEstate.BLL.Manager.CloudinaryService;
 using Div.Link.RealEstate.DAL.Data;
 using Div.Link.RealEstate.DAL.Model;

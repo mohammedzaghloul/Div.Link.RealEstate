@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Div.Link.RealEstate.BLL.DTO
+namespace Div.Link.RealEstate.BLL.DTO.Account
 {
     public class UploadImageDto
     {
