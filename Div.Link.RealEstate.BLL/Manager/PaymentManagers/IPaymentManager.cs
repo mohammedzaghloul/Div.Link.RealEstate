@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Div.Link.RealEstate.BLL.Manager
+namespace Div.Link.RealEstate.BLL.PaymentManagers
 {
-    internal interface IUserManager
+    public interface IPropertyImageManager
     {
+
     }
 }
