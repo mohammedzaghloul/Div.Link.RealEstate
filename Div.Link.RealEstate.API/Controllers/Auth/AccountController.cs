@@ -1,6 +1,6 @@
 ﻿using Div.Link.RealEstate.BLL.DTO.Account;
 using Div.Link.RealEstate.BLL.DTO.User;
-using Div.Link.RealEstate.DAL.Model.ApplicationUser.Div.Link.RealEstate.DAL.Model.ApplicationUser;
+using Div.Link.RealEstate.DAL.Model.ApplicationUser;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
