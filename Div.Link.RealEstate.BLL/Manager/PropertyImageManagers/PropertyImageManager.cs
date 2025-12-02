@@ -8,31 +8,8 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.BLL.PropertyImageManagers
 {
-    public class PropertyImageManager<T> : IBaseManager<PropertyImage> where T : BaseEntity
+    public class PropertyImageManager<T> : BaseManager<PropertyImage> where T : BaseEntity
     {
-        public void Add(PropertyImage entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<PropertyImage> Getall()
-        {
-            throw new NotImplementedException();
-        }
-
-        public PropertyImage GetById(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(PropertyImage entity)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }
