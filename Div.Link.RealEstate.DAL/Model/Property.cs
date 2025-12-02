@@ -7,13 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Div.Link.RealEstate.DAL.Model
-{
-    using global::Div.Link.RealEstate.DAL.Model.ApplicationUser.Div.Link.RealEstate.DAL.Model.ApplicationUser;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     namespace Div.Link.RealEstate.DAL.Model
     {
@@ -55,4 +48,3 @@ namespace Div.Link.RealEstate.DAL.Model
             public string Location => $"{Latitude}, {Longitude}";
         }
     }
-}

@@ -1,4 +1,4 @@
-﻿using Div.Link.RealEstate.DAL.Model.Div.Link.RealEstate.DAL.Model;
+﻿
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,5 @@
 ﻿using Div.Link.RealEstate.DAL.Data;
 using Div.Link.RealEstate.DAL.Model;
-using Div.Link.RealEstate.DAL.Model.Div.Link.RealEstate.DAL.Model;
 using Div.Link.RealEstate.DAL.Repository.BaseRepo;
 
 namespace Div.Link.RealEstate.DAL.Repository.PropertyRepo

@@ -1,4 +1,4 @@
-﻿using Div.Link.RealEstate.DAL.Model.Div.Link.RealEstate.DAL.Model;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

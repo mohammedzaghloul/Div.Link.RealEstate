@@ -2,9 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Div.Link.RealEstate.DAL.Model;
 using Div.Link.RealEstate.DAL.Model.ApplicationUser;
-using Div.Link.RealEstate.DAL.Model.ApplicationUser.Div.Link.RealEstate.DAL.Model.ApplicationUser;
 using Microsoft.AspNetCore.Identity;
-using Div.Link.RealEstate.DAL.Model.Div.Link.RealEstate.DAL.Model;
 
 namespace Div.Link.RealEstate.DAL.Data
 {
