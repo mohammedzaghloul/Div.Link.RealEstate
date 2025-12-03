@@ -17,9 +17,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<ApplicationUser> userManager,
-                                RoleManager<IdentityRole> roleManager,
-                                IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -32,7 +30,6 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // التحقق من وجود المستخدم
             var existingUser = await _userManager.FindByNameAsync(model.UserName);
             if (existingUser != null)
             {
@@ -40,7 +37,6 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
                 return BadRequest(ModelState);
             }
 
-            // التحقق من البريد الإلكتروني
             existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null)
             {
@@ -48,7 +44,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
                 return BadRequest(ModelState);
             }
 
-            // إنشاء المستخدم الجديد
+          
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
@@ -59,7 +55,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
                 Address = model.Address,
                 DateOfBirth = model.DateOfBirth,
                 ProfileImage = model.ProfileImage,
-                EmailConfirmed = true // لأغراض الاختبار
+                EmailConfirmed = true 
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -68,7 +64,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             {
                 await _userManager.AddToRoleAsync(user, "Admin");
 
-                // إنشاء الرد الناجح
+             
                 var response = new
                 {
                     Id = user.Id,
@@ -113,7 +109,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
                 return BadRequest(ModelState);
             }
 
-            // إنشاء التوكن
+        
             var token = await GenerateJwtToken(user);
 
             var response = new
@@ -167,7 +163,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        // Profile Get info
+        // Profile Get 
         [HttpGet("profile/{id}")]
         public async Task<IActionResult> GetProfile(string id)
         {
@@ -192,7 +188,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             return Ok(profile);
         }
 
-        // Profile Post info Update
+        // Profile  Update
         [HttpPut("profile/{id}")]
         public async Task<IActionResult> UpdateProfile(string id, [FromBody] UpdateProfileDto model)
         {
@@ -201,7 +197,7 @@ namespace Div.Link.RealEstate.API.Controllers.Auth
             if (user == null)
                 return NotFound("المستخدم غير موجود");
 
-            // تحديث البيانات
+           
             user.FirstName = model.FirstName ?? user.FirstName;
             user.LastName = model.LastName ?? user.LastName;
             user.PhoneNumber = model.PhoneNumber ?? user.PhoneNumber;
