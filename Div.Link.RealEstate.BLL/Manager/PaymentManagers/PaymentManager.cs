@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.BLL.PaymentManagers
 {
-    public class PaymentManagers : IPaymentManager
+    public class PaymentManager : IPaymentManager
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper mapper;
 
-        public PaymentManagers(IUnitOfWork unitOfWork ,IMapper mapper)
+        public PaymentManager(IUnitOfWork unitOfWork ,IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
             this.mapper = mapper;

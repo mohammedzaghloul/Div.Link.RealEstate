@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Div.Link.RealEstate.BLL.Manager.AppointmentManager
 {
-    public class AppointmentManager
+    public class AppointmentManager :IAppointmentManager
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper mapper;

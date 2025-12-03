@@ -49,7 +49,7 @@ namespace Div.Link.RealEstate.API.Controllers.Upload
 
                 return Ok(new
                 {
-                    imageId = propertyImage.ImageID,
+                    //imageId = propertyImage.ImageID,
                     url = propertyImage.ImageUrl,
                     sortOrder = propertyImage.SortOrder
                 });

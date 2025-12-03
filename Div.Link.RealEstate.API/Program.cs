@@ -1,6 +1,11 @@
 ﻿using CloudinaryDotNet;
 using Div.Link.RealEstate.BLL.AutoMapper;
+using Div.Link.RealEstate.BLL.Manager.AppointmentManager;
 using Div.Link.RealEstate.BLL.Manager.CloudinaryService;
+using Div.Link.RealEstate.BLL.Manager.FavoriteManager;
+using Div.Link.RealEstate.BLL.Manager.PropertyManagers;
+using Div.Link.RealEstate.BLL.PaymentManagers;
+using Div.Link.RealEstate.BLL.PropertyImageManagers;
 using Div.Link.RealEstate.DAL.Data;
 using Div.Link.RealEstate.DAL.Model;
 using Div.Link.RealEstate.DAL.Model.ApplicationUsers;
@@ -36,6 +41,13 @@ namespace Div.Link.RealEstate.API
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddScoped<IAppointmentManager, AppointmentManager>();
+            builder.Services.AddScoped<IPropertyImageManager, PropertyImageManager>();
+            builder.Services.AddScoped<IPropertyManager, PropertyManager>();
+         
+            builder.Services.AddScoped<IPaymentManager, PaymentManager>();
+
+
 
             #endregion
 
